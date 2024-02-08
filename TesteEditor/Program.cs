@@ -31,17 +31,18 @@ namespace TesteEditor
             Console.ReadLine();
         }
 
-        static void GravarTexto(string arquivo, string texto)
+        static void GravarTexto(string arquivo, string texto, bool incremento)
         {
             try
             {
-                StreamWriter sr = new StreamWriter(arquivo);
+                StreamWriter sr = new StreamWriter(arquivo, incremento);
                 sr.WriteLine(texto);
                 sr.Close();
 
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.ReadKey();
             }
         }
 
@@ -67,6 +68,7 @@ namespace TesteEditor
 
             int op = 0;
             string arquivo = "";
+            string texto = "";
 
             while (op != 5) 
             {
@@ -82,13 +84,14 @@ namespace TesteEditor
                         ExibirTexto(arquivo);
                         break;
                     case 3:
-                        string texto = "";
-                        Console.Write("Informe o nome do arquivo: ");
+                        Console.Write("Informe o texto: ");
                         texto = Console.ReadLine();
-                        GravarTexto(arquivo, texto);
+                        GravarTexto(arquivo, texto, false);
                         break;
                     case 4:
-                        Console.WriteLine();
+                        Console.Write("Informe o texto: ");
+                        texto = Console.ReadLine();
+                        GravarTexto(arquivo, texto, true);
                         break;
                 }
             }
